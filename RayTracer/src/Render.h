@@ -4,12 +4,14 @@
 
 #include <memory>
 
-class Render
+class Renderer
 {
 public:
-	Render() = default;
+	Renderer() = default;
 
 	void Render();
+
+	void OnResize(uint32_t width, uint32_t height);
 private:
-	std::shared_ptr<Image> m_Image;
+	std::shared_ptr<Walnut::Image> m_Image;
 };
