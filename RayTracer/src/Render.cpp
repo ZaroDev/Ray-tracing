@@ -21,12 +21,14 @@ void Renderer::OnResize(uint32_t width, uint32_t height)
 
 void Renderer::Render()
 {
+	float aspectRatio = m_FinalImage->GetWidth() / m_FinalImage->GetHeight();
 	for (uint32_t y = 0; y < m_FinalImage->GetHeight(); y++)
 	{
 		for (uint32_t x = 0; x < m_FinalImage->GetWidth(); x++)
 		{
 			glm::vec2 coord = { (float)x / (float)m_FinalImage->GetWidth(), (float)y / (float)m_FinalImage->GetHeight() };
 			coord = coord * 2.0f - 1.0f;
+			coord.x *= aspectRatio;
 			m_ImageData[x + y * m_FinalImage->GetWidth()] = PerPixel(coord);
 		}
 	}
