@@ -40,7 +40,10 @@ public:
 	}
 	virtual void OnUpdate(float ts) override
 	{
-		m_Camera.OnUpdate(ts);
+		if (m_Camera.OnUpdate(ts))
+		{
+			m_Renderer.ResetFrameIndex();
+		}
 	}
 	virtual void OnUIRender() override
 	{
@@ -51,7 +54,11 @@ public:
 		{
 			Render();
 		}
-	
+		ImGui::Checkbox("Accumulate", &m_Renderer.GetSettings().Accumulate);
+		if (ImGui::Button("Reset"))
+		{
+			m_Renderer.ResetFrameIndex();
+		}
 
 		ImGui::End();
 		ImGui::Begin("Scene");
